@@ -20,3 +20,9 @@ services:
       - postgis
     deploy:
       replicas: 0
+    environment:
+      - STATE=delaware
+      - DATABASE=delaware
+      - DB_PORT=5432
+      - DB_HOST=postgis
+      - DB_USER=postgres
