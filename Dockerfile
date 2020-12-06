@@ -1,6 +1,6 @@
 FROM mdillon/postgis
 
-RUN apt-get update && apt-get upgrade -y && apt-get install -y unzip curl && apt-get autoremove -y
+RUN apt-get update && apt-get upgrade -y && apt-get install -y unzip jq unzip curl && apt-get autoremove -y
 
 ENV STATE hawaii
 ENV DATABASE hawaii
