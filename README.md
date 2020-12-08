@@ -14,7 +14,7 @@ Docker Desktop is installed
 ### Update the docker-compose.yml 
 In the previous assignments you created volumes for `postgis` and `geoserver` containers. Open the [docker-compose.yml](docker-compose.yml) file in this repo and update the appropriate volumes sections so that you can re-use these volumes.
 
-### Create a special network for these containers
+### Create a special network for these containers (Fall 2020 Only)
 We will create a network that our containers will run inside and that will give us the ability to connect new containers to the same network without going through all the ordeal of the --link and environment variables that we did for previous labs:
 ```
 docker network create gist604b
@@ -54,10 +54,10 @@ docker rm ... # Anything stopped you want to remove
 ```
 You can remove others (you will have to prune this space eventually if you use docker enough) but it's the named `postgis` that we really **need** to remove stop and remove now. We are going to start a new postgis container and if it is mounting and writing to the same directory at the same time then we are almost guaranteed to have data corruption issues.
 
-### Run `docker-compose up`
+### Run `docker-compose up` from your terminal app
 _Caveat: `docker-compose` must run from the directory in which `docker-compose.yml` is or else provide the full path to the docker-compose by specifying `-f <path to docker-compose.yml>`_
 
-To start the services:
+To start the services from your terminal app or powershell:
 ```
 docker-compose up
 ```
@@ -75,7 +75,7 @@ docker-compose down
 ```
 
 ### Optional: Import OSM data from Delaware
-I wrote a utility that will create a new database, download the OSM shapefiles from geofabrik.de, and populate the database with the shapefile data. This is essentially what you did in a previous lab but here it is in a script inside a docker container that you can run in a single line:
+I wrote a utility that will create a new database, download the OSM shapefiles from geofabrik.de, and populate the database with the shapefile data and published it to docker hub as `aaryno/populate-docker-webgis`. This is essentially what you did in a previous lab but here it is in a script inside a docker container that you can run in a single line:
 ```
 docker run --network gist604b -e STATE=delaware -e DATABASE=delaware aaryno/populate-docker-webgis populate-postgis.sh
 ```
