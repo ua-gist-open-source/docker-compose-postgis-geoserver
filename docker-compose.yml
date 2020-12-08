@@ -3,30 +3,19 @@ services:
   postgis:
     image: "mdillon/postgis"
     ports:
-      - "5432:5432"
+      - "15432:5432"
     volumes:
-      - /Users/aaryno/postgres_data:/var/lib/postgresql
+      - YOUR_DATA_DIR/postgres_data/data:/var/lib/postgresql/data
   geoserver:
     image: "kartoza/geoserver"
     ports:
-      - "8080:8080"
+      - "8280:8080"
     volumes:
-      - /Users/aaryno/geoserver_data:/opt/geoserver/data_dir
+      - YOUR_DATA_DIR/geoserver_data:/opt/geoserver/data_dir
     depends_on:
       - postgis
-  leaflet:
-    image: 84cabb4ec600
-    ports:
-      - "80:80"
-  populate:
-    image: "aaryno/postgis-populate-osm"
-    depends_on:
-      - postgis
-    deploy:
-      replicas: 0
-    environment:
-      - STATE=arizona
-      - DATABASE=arizona
-      - DB_PORT=5432
-      - DB_HOST=postgis
-      - DB_USER=postgres
+
+networks:
+  default:
+    external:
+      name: gist604b
