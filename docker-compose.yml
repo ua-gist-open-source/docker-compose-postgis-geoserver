@@ -12,8 +12,8 @@ services:
       - "8280:8080"
     volumes:
       - YOUR_DATA_DIR/geoserver_data:/opt/geoserver/data_dir
-    depends_on:
-      - postgis
+    environment:
+      - SAMPLE_DATA=true
 
 networks:
   default:
