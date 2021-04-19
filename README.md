@@ -41,18 +41,23 @@ b69e91c52a9a        mdillon/postgis               "sh -c 'psql -h \"$PO…"   8 
 b26a0721aec5        mdillon/postgis               "docker-entrypoint.s…"    8 hours ago         Up About an hour             0.0.0.0:25432->5432/tcp             docker-compose-postgis-geoserver_postgis_1
 04a912394e68        aaryno/jupyter-geo            "jupyter notebook --…"    46 hours ago        Exited (0) 46 hours ago                                         sharp_wu
 ```
-You can remove the `postgis` container like this:
+You can remove any currently running containers like this:
 ```
-docker stop postgis
-docker rm postgis
-docker stop geoserver
-docker rm geoserver
-...
-docker stop ... # Anything running that you want to stop
-docker rm ... # Anything stopped you want to remove
-...
+docker stop 9aef61bd6d24
+docker rm 9aef61bd6d24
 ```
-You can remove others (you will have to prune this space eventually if you use docker enough) but it's the named `postgis` that we really **need** to remove stop and remove now. We are going to start a new postgis container and if it is mounting and writing to the same directory at the same time then we are almost guaranteed to have data corruption issues.
+You can also remove them from your Docker Desktop application.
+
+### Edit your `docker-compose.yml` file
+This file describes how two containers, `mdillon/postgis`, and `kartoza/geoserver`, will be run. Each requires a mapped volume. This should be a mapping of your host path (the path on your computer) to a container path. 
+
+For example, line 8 reads like this:
+```
+      - YOUR_DATA_DIR/postgres_data/data:/var/lib/postgresql/data
+```
+Substitute the `YOUR_DATA_DIR` for a directory on your computer. For Unix users it might be something like `/Users/aaryno` or `/home/aaryno`. For Windows users it might be something like `c:/gist604b`. _The rest of the line (`/postgres_data/data:/var/lib/postgresql/data`) should be be unchanged!_
+
+Save the file, then launch the containers using `docker-compose`:
 
 ### Run `docker-compose up` from your terminal app
 _Caveat: `docker-compose` must run from the directory in which `docker-compose.yml` is or else provide the full path to the docker-compose by specifying `-f <path to docker-compose.yml>`_
@@ -74,10 +79,10 @@ And you would shut it down with:
 docker-compose down
 ```
 
-### Optional: Import OSM data from Delaware
+### One time only: Import OSM data from Delaware
 I wrote a utility that will create a new database, download the OSM shapefiles from geofabrik.de, and populate the database with the shapefile data and published it to docker hub as `aaryno/populate-docker-webgis`. This is essentially what you did in a previous lab but here it is in a script inside a docker container that you can run in a single line:
 ```
-docker run --network gist604b -e STATE=delaware -e DATABASE=delaware aaryno/populate-docker-webgis populate-postgis.sh
+docker run --network gist604b -e STATE=arizona -e DATABASE=arizona aaryno/populate-docker-webgis populate-postgis.sh
 ```
 
 ### Deliverables:
