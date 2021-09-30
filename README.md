@@ -79,7 +79,7 @@ And you would shut it down with:
 docker-compose down
 ```
 
-### One time only: Import OSM data from Delaware
+### One time only: Import OSM data from Arizona
 I wrote a utility that will create a new database, download the OSM shapefiles from geofabrik.de, and populate the database with the shapefile data and published it to docker hub as `aaryno/populate-docker-webgis`. This is essentially what you did in a previous lab but here it is in a script inside a docker container that you can run in a single line:
 ```
 docker run --network gist604b -e STATE=arizona -e DATABASE=arizona aaryno/populate-docker-webgis populate-postgis.sh
