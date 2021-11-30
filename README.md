@@ -59,7 +59,7 @@ Substitute the `YOUR_DATA_DIR` for a directory on your computer. For Unix users 
 
 Save the file, then launch the containers using `docker compose`:
 
-### Run `docker-compose up` from your terminal app
+### Run `docker compose up` from your terminal app
 _Caveat: `docker compose` must run from the directory in which `docker-compose.yml` is or else provide the full path to the docker-compose by specifying `-f <path to docker-compose.yml>`_
 
 To start the services from your terminal app or powershell:
