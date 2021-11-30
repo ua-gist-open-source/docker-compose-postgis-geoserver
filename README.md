@@ -57,14 +57,14 @@ For example, line 8 reads like this:
 ```
 Substitute the `YOUR_DATA_DIR` for a directory on your computer. For Unix users it might be something like `/Users/aaryno` or `/home/aaryno`. For Windows users it might be something like `c:/gist604b`. _The rest of the line (`/postgres_data/data:/var/lib/postgresql/data`) should be be unchanged!_
 
-Save the file, then launch the containers using `docker-compose`:
+Save the file, then launch the containers using `docker compose`:
 
 ### Run `docker-compose up` from your terminal app
-_Caveat: `docker-compose` must run from the directory in which `docker-compose.yml` is or else provide the full path to the docker-compose by specifying `-f <path to docker-compose.yml>`_
+_Caveat: `docker compose` must run from the directory in which `docker-compose.yml` is or else provide the full path to the docker-compose by specifying `-f <path to docker-compose.yml>`_
 
 To start the services from your terminal app or powershell:
 ```
-docker-compose up
+docker compose up
 ```
 Output from the geoserver and postgis containers will start being output to the terminal. Now you can access them through the local ports of `8080` and `5432` respectively.
 
@@ -72,11 +72,11 @@ To shut them down, you can CTRL+C or close the window.
 
 If you want to run the services in `detached` mode, you can add `-d` to the command, which would allow you to close the window and it would still be running:
 ```
-docker-compose up -d
+docker compose up -d
 ```
 And you would shut it down with:
 ```
-docker-compose down
+docker compose down
 ```
 
 ### Deliverables:
