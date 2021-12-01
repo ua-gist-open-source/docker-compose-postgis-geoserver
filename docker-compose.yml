@@ -11,7 +11,6 @@ services:
       - /home/exouser/data/:/data
 
   postgis:
-    user: "1001:1001"
     image: "mdillon/postgis"
     ports:
       - "25432:5432"
