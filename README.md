@@ -14,7 +14,7 @@ Docker Desktop is installed
 ### Update the docker-compose.yml 
 In the previous assignments you created volumes for `postgis` and `geoserver` containers. Open the [docker-compose.yml](docker-compose.yml) file in this repo and update the appropriate volumes sections so that you can re-use these volumes.
 
-### Create a special network for these containers (Fall 2020 Only)
+### Create a special network for these containers
 We will create a network that our containers will run inside and that will give us the ability to connect new containers to the same network without going through all the ordeal of the --link and environment variables that we did for previous labs:
 ```
 docker network create gist604b
