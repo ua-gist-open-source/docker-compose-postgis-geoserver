@@ -1,15 +1,6 @@
 version: "3.8"
 services:
 
-# This is a workaround for geoserver permissions issues with volumes when working with the VMs
-  initializer:
-    image: alpine
-    container_name: initializer
-    restart: "no"
-    entrypoint:  /bin/sh -c "mkdir -p /data/geoserver_data && chmod -R 777 /data/geoserver_data"
-    volumes:
-      - /home/exouser/data/:/data
-
   postgis:
     image: "mdillon/postgis"
     hostname: postgis
@@ -19,11 +10,7 @@ services:
 # Uncomment his for windows, but update your path to reflect where you want your database data stored
 # Change only the "c:/gist604b_data" and leave the "postgres_data/data:/var/lib/postgresql/data" as is.
 #      - c:/gist604b_data/postgres_data/data:/var/lib/postgresql/data
-# Uncomment this one for using the VM
-#      - /home/exouser/data/postgres_data/data:/var/lib/postgresql/data
   geoserver:
-    depends_on:
-      - initializer
     image: "kartoza/geoserver"
     ports:
       - "8280:8080"
@@ -31,8 +18,6 @@ services:
 # Uncomment his for windows, but update your path to reflect where you want your geoserver data stored
 # Change only the "c:/gist604b_data" and leave the "geoserver_data/data_dir:/opt/geoserver/data_dir" as is.
 #      - c:/gist604b_data/geoserver_data/data_dir:/opt/geoserver/data_dir
-# Uncomment this one for using the VM
-#      - /home/exouser/data/geoserver_data/data_dir:/opt/geoserver/data_dir
     environment:
       - GEOSERVER_ADMIN_USER=admin
       - GEOSERVER_ADMIN_PASSWORD=geoserver
